@@ -1,27 +1,25 @@
 IF JARVIS — ANDROID 0.5
 
-ARQUITETURA ATUAL
-- Interface principal empacotada em HTML dentro do app.
-- WebView carrega jarvis.html via WebViewAssetLoader.
-- Supabase é usado para autenticação e dados do sistema IF.
-- Reconhecimento de voz usa o serviço nativo do Android via RecognizerIntent.
-- Respostas por voz usam TextToSpeech nativo do Android em pt-BR.
-- O app possui fallback por teclado.
-
-BUILD
-- Java 17.
-- Android compileSdk/targetSdk 36.
-- Gradle 8.13.
-- O GitHub Actions compila :app:assembleDebug e publica o APK como artifact.
+Arquitetura atual:
+- App Android com WebView local.
+- Interface principal em app/src/main/assets/jarvis.html.
+- Integração com Supabase para autenticação e dados da IF.
+- Reconhecimento de voz pelo Android via RecognizerIntent.
+- Resposta por voz via Android TextToSpeech.
+- Teclado como fallback.
+- Build pelo GitHub Actions.
 
 IMPORTANTE
-- Vosk não faz mais parte da arquitetura 0.5.
-- Não existe escuta contínua em segundo plano nesta versão.
-- O usuário toca no microfone para iniciar o reconhecimento nativo do Android.
-- A autenticação deve usar uma conta real existente no mesmo projeto Supabase do sistema IF.
+- Esta versão não usa Vosk.
+- Esta versão não mantém microfone ouvindo continuamente.
+- O botão de microfone continua como fallback/laboratório, não como objetivo final do produto.
 
-PRÓXIMOS PASSOS
-1. estabilizar autenticação e recuperação de acesso;
-2. validar leitura e gravação real no Supabase;
-3. fechar fluxo completo de manutenção/estoque no aparelho;
-4. somente depois avaliar wake word/assistente em segundo plano, caso ainda seja necessário.
+OBJETIVO DO PROJETO
+O Jarvis será o assistente inteligente integrado ao App IF, com comportamento semelhante ao conceito de “OK Google” / “Hey Siri”. O alvo é permitir ativação do assistente pelo Android, conversa por voz, acesso contextual aos dados do sistema IF e, posteriormente, wake word local “Jarvis”.
+
+PRÓXIMA ETAPA — 0.6
+1. Registrar o IF Jarvis como VoiceInteractionService.
+2. Criar VoiceInteractionSessionService e VoiceInteractionSession.
+3. Permitir que o usuário selecione o IF Jarvis como assistente padrão do Android.
+
+Depois dessa fundação serão adicionados áudio contínuo de sessão, wake word e camada de IA.
